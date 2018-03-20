@@ -1626,7 +1626,7 @@ typedef struct AVPacketSideData {
 } AVPacketSideData;
 
 /**
- * This structure stores compressed data. It is typically exported by demuxers
+ * this structure stores compressed data. it is typically exported by demuxers
  * and then passed as input to decoders, or received as output from encoders and
  * then passed to muxers.
  *
