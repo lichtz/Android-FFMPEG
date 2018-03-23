@@ -19,6 +19,9 @@ extern "C" {
 //视频像素数据格式库
 #include "libswscale/swscale.h"
 
+#include <android/log.h>
+
+#define LOGI(...)  __android_log_print(ANDROID_LOG_INFO ,"zyl",__VA_ARGS__);
 
 JNIEXPORT void JNICALL Java_com_zero_licht_ffmpeg_video_1utils_like
         (JNIEnv *env, jclass jobj, jstring jinFilePath, jstring joutFilePath) {
@@ -172,6 +175,7 @@ JNIEXPORT void JNICALL Java_com_zero_licht_ffmpeg_video_1utils_like
         //<0:读取错误或者读取完毕
         //2、是否是我们的视频流
         if (packet->stream_index == av_stream_index) {
+
             //第七步：解码
             //学习一下C基础，结构体
             //3、解码一帧压缩数据->得到视频像素数据->yuv格式
@@ -180,6 +184,8 @@ JNIEXPORT void JNICALL Java_com_zero_licht_ffmpeg_video_1utils_like
             avcodec_send_packet(avcodec_context, packet);
             //3.2 解码一帧视频压缩数据->进行解码(作用：用于解码操作)
             decode_result = avcodec_receive_frame(avcodec_context, avframe_in);
+
+             LOGI("main  kkkkkkk%d",av_stream_index);
             if (decode_result == 0) {
                 //解码成功
                 //4、注意：在这里我们不能够保证解码出来的一帧视频像素数据格式是yuv格式

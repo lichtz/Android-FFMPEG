@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.File;
@@ -18,14 +19,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
+        Button tv = (Button) findViewById(R.id.sample_text);
           tv.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
+                   new Thread(){
+                       @Override
+                       public void run() {
+                           super.run();
+                           video_utils.like(Environment.getExternalStorageDirectory()+ File.separator+"with"
+                                   +File.separator+"l.mp4",Environment.getExternalStorageDirectory()+ File.separator+"with"
+                                   +File.separator+"o.mp4");
+                       }
+                   }.start();
 
-                  video_utils.like(Environment.getExternalStorageDirectory()+ File.separator+"with"
-                  +File.separator+"l.mp4",Environment.getExternalStorageDirectory()+ File.separator+"with"
-                          +File.separator+"o.mp4");
               }
           });
     }

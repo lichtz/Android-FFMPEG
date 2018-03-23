@@ -5,7 +5,7 @@ include_directories(src/main/cpp/include)
 add_library( # Sets the name of the library.
              native-lib
              SHARED
-             src/main/cpp/decode_video.c )
+             src/main/cpp/decode_video.c)
 
 add_library(avdevice-57 SHARED IMPORTED)
 set_target_properties(avdevice-57 PROPERTIES IMPORTED_LOCATION
